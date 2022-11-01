@@ -1,3 +1,26 @@
+<?php
+    $mine = "Najma_1202200141";
+
+    $car = [
+    [
+        "carname" => "Avanza",
+        "img" => "Avanza.png",
+        "value" => "Avanza"
+    ],
+    [
+        "carname" => "Brio",
+        "img" => "Brio.png",
+        "value" => "Brio"
+    ],
+    [
+        "carname" => "Livina",
+        "img" => "Livina.png",
+        "value" => "Grand Livina"
+    ]
+    ]
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -16,17 +39,11 @@
                 <ul class="navbar-nav">
                     <li class="nav-item mx-2">
                         <a class="nav-link active" href="Najma_home.php"> Home </a>
-                        <!-- href home diganti file Najma_home.php -->
+                        
                     </li>
 
                     <li class="nav-item mx-2">
                         <a class="nav-link active" href="Najma_booking.php"> Booking </a>
-                            <!-- href home diganti file Najma_booking.php -->
-                    </li>
-
-                    <li class="nav-item mx-2">
-                        <a class="nav-link active" href="Najma_mybooking.php"> My Booking </a>
-                            <!-- href home diganti file Najma_booking.php -->
                     </li>
                 </ul>
             </div>
@@ -42,52 +59,48 @@
         <form method="post" action="Najma_booking.php">
             <div class="row mx-auto">
             
-    
                 <!-- Mobil Avanza -->
                 <div class="card mx-auto" style="width: 350px;">
                     <img width = "340" height="180" src="Avanza.png" class="card-img-top" alt="1cm">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item" style="font-size: 20pt; text-align: center;"> <b>Avanza</b> </li>
+                        <li class="list-group-item"> Rp300.000/hari </li>
                         <li class="list-group-item"> 8 Kursi </li>
                         <li class="list-group-item"> 1.500cc </li>
                         <li class="list-group-item"> Manual </li>
                     </ul>
-                    <input class="btn btn-secondary" type="submit" name="submit" value="Book Now">
-                    <!-- href diganti php ke avanza -->
+                    <button type="submit" class="btn btn-secondary form-control" value="Avanza" name="carname">Book Now</button>
                 </div>
 
-
-            <!-- <form method="post" action="Najma_booking.html"> -->
                 <!-- Mobil Brio -->
                 <div class="card mx-auto" style= "width: 350px;">
                     <img height = "160" style="margin-top: 10px; margin-bottom: 10px;" src="Brio.png" class="card-img-top" alt="1cm">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item" style="font-size: 20pt; text-align: center;"> <b>Brio</b> </li>
+                        <li class="list-group-item"> Rp200.000/hari </li>
                         <li class="list-group-item"> 5 Kursi </li>
                         <li class="list-group-item"> 1.200cc </li>
                         <li class="list-group-item"> Matic </li>
                     </ul>
-                    <input class="btn btn-secondary" type="submit" name="submit" value="Book Now">
-                    <!-- href diganti php ke avanza -->
+                    <button type="submit" class="btn btn-secondary form-control" value="Brio" name="carname">Book Now</button>
                 </div>
-            <!-- </form> -->
 
-            <!-- <form method="post" action="Najma_booking.html"> -->
                 <!-- Mobil Grand Livina -->
                 <div class="card mx-auto" style="width: 350px;">
                     <img src="Livina.png" class="card-img-top" alt="1cm">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item" style="font-size: 20pt; text-align: center;"> <b> Grand Livina </b> </li>
+                        <li class="list-group-item"> Rp250.000/hari </li>
                         <li class="list-group-item"> 5 Kursi </li>
                         <li class="list-group-item"> 1.200cc </li>
                         <li class="list-group-item"> Matic </li>
                     </ul>
-                    <input class="btn btn-secondary" type="submit" name="submit" value="Book Now">
-                    <!-- href diganti php ke avanza -->
-                </div>
-            </form>
-        </div>
+                    <button type="submit" class="btn btn-secondary form-control" value="Grand Livina" name="carname">Book Now</button>
+                </div>       
+            </div>
+        </form>
     </div>
+
 
     <footer style="background-color: lightgrey; height: 50px; margin-top: 30px;">
         <div class="container-fluid" data-bs-toggle = "modal" data-bs-target= "#crnajem">

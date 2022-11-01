@@ -9,23 +9,44 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   </head>
   <body>
+
+    <?php
+
+        $mine = "Najma_1202200141";
+
+        if (isset ($_POST["carname"]))
+            {
+            $car = $_POST["carname"];
+            if ($car == "Avanza") {
+                $img = "Avanza.png";
+            }
+            elseif ($car == "Brio") {
+                $img = "Brio.png";
+            }
+            elseif ($car == "Grand Livina") {
+                $img = "Livina.png";
+            }
+        }
+        else {
+            $img = "Avanza.png";
+        }
+
+
+
+    ?>
+
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" style="justify-content: center;" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item mx-2">
-                        <a class="nav-link active" href="Najma_home.html"> Home </a>
-                        <!-- href home diganti file Najma_home.php -->
+                        <a class="nav-link active" href="Najma_home.php"> Home </a>
+                        
                     </li>
 
                     <li class="nav-item mx-2">
-                        <a class="nav-link active" href="Najma_bookingcar.html"> Booking </a>
-                            <!-- href home diganti file Najma_booking.php -->
-                    </li>
-
-                    <li class="nav-item mx-2">
-                        <a class="nav-link active" href="Najma_mybooking.html"> My Booking </a>
-                            <!-- href home diganti file Najma_booking.php -->
+                        <a class="nav-link active" href="Najma_booking.php"> Booking </a>
+                        
                     </li>
                 </ul>
             </div>
@@ -34,93 +55,111 @@
 
     <div class="container-fluid text-center mt-3">
         <h2 style="font-family: Times New Roman;"> Rent Your Car Now!</h2>
-        <!-- <p style="font-family: Times New Roman; margin-top: 20px;"> Find your best deal, here!</p> -->
+        
     </div>
 
     <div class="container-fluid py-2 mx-auto">
-        <table class="table mx-auto">
+        <table class="table table-borderless mx-auto">
             <tr>
-                <th class="col mx-auto" style="border-color: black; border-width: 5px;">
-                    <img class="mx-auto d-block" width= "590px" src="Avanza.png">
+                <th class="col mx-auto">
+                    <?
+                        if (isset ($_POST["carname"]))
+                            {
+                            $car = $_POST["carname"];
+                            if ($car == "Avanza") {
+                                $img = "Avanza.png";
+                            }
+                            elseif ($car == "Brio") {
+                                $img = "Brio.png";
+                            }
+                            elseif ($car == "Grand Livina") {
+                                $img = "Livina.png";
+                            }
+                        }
+                        else {
+                            $car == "Avanza";
+                            $img = "Avanza.png";
+                        }
+                    ?>
+                    <img src=<?= $img ?> class="mx-auto d-flex justify-content-center" width="560px">
                 </th>
-                <th class="col mx-auto" style="border-color: green; border-width: 5px;">
-                    <form id="booking" action="">
+                <th class="col mx-auto">
+                    <form method="GET" action="Najma_mybooking.php">
                         <div class="row">
                             <div class="labeltext pt-2">
                                 <label for="name"> Your Name </label>
                             </div>
                             <div class="textinput pt-2">
-                                <input type="text" style="width: 100%; padding: 7px;" id="name" name="custname" placeholder="Your Name...">
+                                <input type="text" style="width: 100%; padding: 7px;" name="name" id="custname" value="<?=$mine?>" readonly>
                             </div>
 
                             <div class="labeltext pt-2">
-                                <label for="name"> Book Date </label>
+                                <label for="date"> Book Date </label>
                             </div>
                             <div class="textinput pt-2">
-                                <input type="date" style="width: 100%; padding: 7px;" id="date" name="bookdate">
+                                <input type="date" style="width: 100%; padding: 7px;" name="date" id="bookdate" required>
                             </div>
 
                             <div class="labeltext pt-2">
-                                <label for="name"> Start Time </label>
+                                <label for="time"> Start Time </label>
                             </div>
                             <div class="textinput pt-2">
-                                <input type="time" style="width: 100%; padding: 7px;" id="time" name="starttime">
+                                <input type="time" style="width: 100%; padding: 7px;" name="time" id="starttime" required>
                             </div>
 
                             <div class="labeltext pt-2">
-                                <label for="name"> Duration (Days) </label>
+                                <label for="days"> Duration (Days) </label>
                             </div>
                             <div class="textinput pt-2">
-                                <input type="number" min="1" max="31" style="width: 100%; padding: 7px;" id="days" name="durationdays" placeholder="1 - 31 (Days)">
+                                <input type="number" min="1" max="31" style="width: 100%; padding: 7px;" name="days" id="durationdays" placeholder="1 - 31 (Days)" required>
                             </div>
 
                             <div class="labeltext pt-2">
-                                <label for="name"> Car Type </label>
+                                <label for="cartype"> Car Type </label>
                             </div>
 
                             <div class="textinput pt-2">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Choose Car Type</option>
-                                    <option value="1">Avanza</option>
-                                    <option value="2">Brio</option>
-                                    <option value="3">Grand Livina</option>
+                                <select class="form-select" aria-label="Default select example" name="cartype">
+                                    <option value = Avanza> Avanza </option>
+                                    <option value = Brio> Brio </option>
+                                    <option value = "Grand Livina"> Grand Livina </option>
                                 </select>
                             </div>
 
                             <div class="labeltext pt-2">
-                                <label for="name"> Phone Number</label>
+                                <label for="phone"> Phone Number</label>
                             </div>
                             <div class="textinput pt-2">
-                                <input type="tel" min="11" max="12" style="width: 100%; padding: 7px;" id="days" name="durationdays" placeholder="08XXXXXXXXXX">
+                                <input type="tel" min="11" max="12" style="width: 100%; padding: 7px;" name="phone" id="phonenumber" placeholder="08XXXXXXXXXX">
                             </div>
 
                             <div class="labeltext pt-2">
-                                <label for="name"> Add Services </label>
+                                <label for="serv"> Add Services </label>
                             </div>
 
                             <div class="textinput pt-2">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault" style="font-weight: normal;">
+                                    <input class="form-check-input" type="checkbox" name="services[]" value="Health Protocol" id="Health Protocol">
+                                    <label class="form-check-label" for="Health Protocol" style="font-weight: normal;">
                                       Health Protocol / Rp25.000
                                     </label>
                                   </div>
                                   <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault" style="font-weight: normal;">
+                                    <input class="form-check-input" type="checkbox" name="services[]" value="Driver" id="Driver">
+                                    <label class="form-check-label" for="Driver" style="font-weight: normal;">
                                       Driver / Rp100.000
                                     </label>
                                   </div>
                                   <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault" style="font-weight: normal;">
+                                    <input class="form-check-input" type="checkbox" name="services[]" value="Fuel Filled" id="Fuel Filled">
+                                    <label class="form-check-label" for="Fuel Filled" style="font-weight: normal;">
                                       Fuel Filled / Rp250.000
                                     </label>
                                   </div>
                             </div>
 
                             <div class="d-grid gap-2 pt-3">
-                                <button class="btn btn-dark" type="button" style="width:100%; background-color: rgb(37, 131, 198);"> Book </button>
+                                <button class="btn btn-dark" type="submit" style="width:100%; background-color: rgb(37, 131, 198);"> Book </button>
                             </div>
                         </div>
                     </form>

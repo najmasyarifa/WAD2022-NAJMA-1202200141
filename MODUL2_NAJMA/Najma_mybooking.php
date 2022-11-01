@@ -9,23 +9,63 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   </head>
   <body>
+
+    <?php
+        if (isset ($_POST["book"]))
+            $tanggal = $_GET['date'];
+            $jam = $_GET['time'];
+            $durasi = $_GET['days'];
+            $mobil = $_GET['cartype'];
+            $telpon = $_GET['phone'];
+            $cin = date("d-m-Y H:i", strtotime("$jam"));
+            $cout = date("d-m-Y H:i", strtotime($durasi . " " . "days" , strtotime($cin)));
+
+            $price = 0;
+            if ($mobil == "Avanza") {
+                $price = 300000;
+            }
+            elseif ($mobil == "Brio") {
+                $price = 200000;
+            }
+            elseif ($mobil == "Livina") {
+                $price = 250000;
+            }
+
+            $addons = 0; 
+            if (isset($_GET["services"])){
+                foreach ($_GET["services"] as $rentservice ){
+                    if ($rentservice == "Health Protocol"){
+                        $addons += 25000;
+                    }
+                    if ($rentservice == "Driver"){
+                        $addons += 100000;
+                    }
+                    if ($rentservice == "Fuel Filled"){
+                        $addons += 250000;
+                    }
+                }
+            }
+            else{
+                $addons += 0;}
+
+            $total = ($price * $durasi) + $addons;
+
+            function rupiah($total) {
+                $totalprice = "Rp" . number_format($total,'2',',','.');;
+                return $totalprice;
+            }
+            
+    ?>
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark sticky-top">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" style="justify-content: center;" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item mx-2">
-                        <a class="nav-link active" href="Najma_home.html"> Home </a>
-                        <!-- href home diganti file Najma_home.php -->
+                        <a class="nav-link active" href="Najma_home.php"> Home </a>
                     </li>
 
                     <li class="nav-item mx-2">
-                        <a class="nav-link active" href="Najma_bookingcar.html"> Booking </a>
-                            <!-- href home diganti file Najma_booking.php -->
-                    </li>
-
-                    <li class="nav-item mx-2">
-                        <a class="nav-link active" href="Najma_mybooking.html"> My Booking </a>
-                            <!-- href home diganti file Najma_booking.php -->
+                        <a class="nav-link active" href="Najma_booking.php"> Booking </a>
                     </li>
                 </ul>
             </div>
@@ -33,7 +73,7 @@
     </nav>
 
     <div class="container-fluid text-center mt-3">
-        <h2 style="font-family: Times New Roman;"> Thank You NAMA_NIM for Reserving! </h2>
+        <h2 style="font-family: Times New Roman;"> Thank You NAJMA_1202200141 for Reserving! </h2>
         <p style="font-family: Times New Roman; margin-top: 20px;"> Please double check your reservation details </p>
     </div>
 
@@ -53,15 +93,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr scope="row">
-                        <th scope="row"> 1202200141 </th>
-                        <td> NAJMA_1202200141</td>
-                        <td> a </td>
-                        <td> b </td>
-                        <td>c</td>
-                        <td> d</td>
-                        <td> e</td>
-                        <td>f</td>
+                    <tr>
+                        <th scope="row"> <?= rand(1000000000, 9999999999);?> </th>
+                        <td> Najma_1202200141 </td>
+                        <td> <?= $cin ?> </td>
+                        <td> <?= $cout ?> </td>
+                        <td> <?= $mobil?> </td>
+                        <td> <?= $telpon?></td>
+                        <td> <ul>
+                                <?php
+                                    if(isset($_GET['services'])){
+                                        foreach ($_GET["services"] as $rentservice ){
+                                            echo "<li>$rentservice</li>";
+                                        }
+                                    }
+                                    else{
+                                        echo "No Service";
+                                    }
+                                ?>
+                            </ul>  </td>
+                        <td> <?php echo rupiah($total);?> </td>
                     </tr>
                 </tbody>
             </table>
@@ -95,4 +146,3 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
-
