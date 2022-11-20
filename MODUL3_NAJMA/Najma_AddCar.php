@@ -1,4 +1,4 @@
-<?
+<?php
 $connector = mysqli_connect("localhost:3308", "root", "","showroom_najma_table");
 ?>
 
@@ -31,7 +31,7 @@ $connector = mysqli_connect("localhost:3308", "root", "","showroom_najma_table")
 
     <!-- Form Tambah Mobil -->
     <div class="container-fluid py-2 mx-auto">
-        <form style="margin-left: 100px; margin-right: 300px;" method="POST" action="" enctype="multipart/form-data">
+        <form style="margin-left: 100px; margin-right: 300px;" method="POST" action="Najma_AddCar.php" enctype="multipart/form-data">
             
             <!-- Header -->
             <h3> Tambah Mobil </h3>
@@ -110,43 +110,39 @@ $connector = mysqli_connect("localhost:3308", "root", "","showroom_najma_table")
     </div>
 
     <!-- PHP Database -->
-    <?
-        if (isset($_POST["submit"])){
+    <?php
+        if (isset($_POST['submit'])){
             $mobil = $_POST['car'];
-                echo $mobil;
             $nama = $_POST['name'];
-                echo $name;
             $merk = $_POST['merk'];
-                echo $merk;
-            $tanggal = $_POST ['date'];
-                echo $date;
-            $deskripsi = $_POST ['desc'];
-                echo $desc;
+            $tanggal = $_POST['date'];
+            $deskripsi = $_POST['desc'];
             $foto = $_FILES['foto']['name'];
-                echo $foto;
             $fotomobil = $_FILES['foto']['tmp_name'];
             $status = $_POST['status'];
-                echo $status;
 
             move_uploaded_file($fotomobil, 'Upload/'.$foto);
 
-            $insert = "INSERT INTO modul3 VALUES ('','$mobil','$nama','$merk','$tanggal','$deskripsi','$foto','$status')";
+            $select = "SELECT * FROM 'modul3'";
+
+            mysqli_query($connector, $select);
+
+            $insert = "INSERT INTO modul3('id_mobil','nama_mobil','pemilik_mobil','merk_mobil','tanggal_beli','deskripsi','foto_mobil','status_pembayaran') VALUES ('','$mobil','$nama','$merk','$tanggal','$deskripsi','$foto','$status')";
 
             mysqli_query($connector, $insert);
-        
 
             if (mysqli_affected_rows($connector) > 0){ ?>
-                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                        <div class="toast-header">
-                            <img src="..." class="rounded me-2" alt="...">
-                            <strong class="me-auto">Bootstrap</strong>
-                            <small>11 mins ago</small>
-                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                        </div>
-                        <div class="toast-body">
-                            Hello, world! This is a toast message.
-                        </div>
-                    </div> <?
+                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <img src="..." class="rounded me-2" alt="...">
+                        <strong class="me-auto">Bootstrap</strong>
+                        <small>11 mins ago</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        Hello, world! This is a toast message.
+                    </div>
+                </div> <?
                 }
             else { ?>
                 <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -160,9 +156,9 @@ $connector = mysqli_connect("localhost:3308", "root", "","showroom_najma_table")
                         Hello, world! This is a toast message.
                     </div>
                 </div> <?
+                
             }
         }
-
     ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
