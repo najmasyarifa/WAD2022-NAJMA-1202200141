@@ -14,7 +14,7 @@
             <div class="collapse navbar-collapse" style="justify-content: left;" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item mx-2">
-                        <a class="nav-link active" href="Najma_Home.html"> Home </a>
+                        <a class="nav-link active" href="Najma_Home.php"> Home </a>
                     </li>
 
                     <li class="nav-item mx-2">
@@ -36,7 +36,7 @@
                     <!-- Kolom kiri -->
                     <h1> Selamat Datang Di Show Room Najma </h1>
                     <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquaa. </p>
-                    <a href="Najma_AddCar.html" type="button" class="btn btn-primary mt-3">Add Car</a>
+                    <a href="Najma_AddCar.php" type="button" class="btn btn-primary mt-3">Add Car</a>
                     
                     <!-- Footer -->
                     <nav class="navbar navbar-expand-xl navbar-light sticky-top" style="fill-opacity: 0;">

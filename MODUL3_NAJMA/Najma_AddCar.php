@@ -1,5 +1,5 @@
 <?
-$connector = mysqli_connect ("localhost:3308", "root", "modul3");
+$connector = mysqli_connect("localhost:3308", "root", "","showroom_najma_table");
 ?>
 
 <!doctype html>
@@ -18,7 +18,7 @@ $connector = mysqli_connect ("localhost:3308", "root", "modul3");
             <div class="collapse navbar-collapse" style="justify-content: left;" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item mx-2">
-                        <a class="nav-link active" href="Najma_Home.html"> Home </a>
+                        <a class="nav-link active" href="Najma_Home.php"> Home </a>
                     </li>
 
                     <li class="nav-item mx-2">
@@ -31,7 +31,7 @@ $connector = mysqli_connect ("localhost:3308", "root", "modul3");
 
     <!-- Form Tambah Mobil -->
     <div class="container-fluid py-2 mx-auto">
-        <form style="margin-left: 100px; margin-right: 300px;" method="GET" action="Najma_mybooking.php">
+        <form style="margin-left: 100px; margin-right: 300px;" method="POST" action="" enctype="multipart/form-data">
             
             <!-- Header -->
             <h3> Tambah Mobil </h3>
@@ -44,21 +44,21 @@ $connector = mysqli_connect ("localhost:3308", "root", "modul3");
                     <label for="car"> <b>Nama Mobil</b>  </label>
                 </div>
                 <div class="textinput pt-2">
-                    <input type="text" style="width: 100%; padding: 7px;" name="car" id="carname" value="Nama Mobil Anda" required>
+                    <input type="text" style="width: 100%; padding: 7px;" name="car" id="carname" placeholder="Nama Mobil Anda" required>
                 </div>
 
                 <div class="labeltext pt-2">
                     <label for="name"> <b>Nama Pemilik</b>  </label>
                 </div>
                 <div class="textinput pt-2">
-                    <input type="text" style="width: 100%; padding: 7px;" name="name" id="ownername" value="Nama Anda" required>
+                    <input type="text" style="width: 100%; padding: 7px;" name="name" id="ownername" placeholder="Nama Anda" required>
                 </div>
 
                 <div class="labeltext pt-2">
                     <label for="merk"> <b>Merk Mobil</b>  </label>
                 </div>
                 <div class="textinput pt-2">
-                    <input type="text" style="width: 100%; padding: 7px;" name="merk" id="merkcar" value="Merk Mobil Anda" required>
+                    <input type="text" style="width: 100%; padding: 7px;" name="merk" id="merkcar" placeholder="Merk Mobil Anda" required>
                 </div>
 
                 <div class="labeltext pt-2">
@@ -72,7 +72,7 @@ $connector = mysqli_connect ("localhost:3308", "root", "modul3");
                     <label for="desc"> <b>Deskripsi</b>  </label>
                 </div>
                 <div class="textinput pt-2">
-                    <textarea style="width: 100%; padding: 7px;" name="desc" id="desccar" value="Masukan Deskripsi Mobil Anda" required></textarea>
+                    <textarea style="width: 100%; padding: 7px;" name="desc" id="desccar" placeholder="Masukan Deskripsi Mobil Anda" required></textarea>
                 </div>
 
                 <div class="labeltext pt-2">
@@ -83,19 +83,19 @@ $connector = mysqli_connect ("localhost:3308", "root", "modul3");
                 </div>
 
                 <div class="labeltext pt-2">
-                    <label for="status"> Status Pembayaran </label>
+                    <label for="status"> <b>Status Pembayaran</b> </label>
                 </div>
 
                 <div class="radio pt-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" value="Lunas" id="statuslunas" required>
+                        <input class="form-check-input" type="radio" name="status[]" value="Lunas" id="statuslunas" required>
                         <label class="form-check-label" for="status" style="font-weight: normal;">
                           Lunas
                         </label>
                     </div>
                 
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" value="Belum Lunas" id="statuspaylater" required>
+                        <input class="form-check-input" type="radio" name="status[]" value="Belum Lunas" id="statuspaylater" required>
                         <label class="form-check-label" for="status" style="font-weight: normal;">
                           Belum Lunas
                         </label>
@@ -103,11 +103,67 @@ $connector = mysqli_connect ("localhost:3308", "root", "modul3");
                 </div>
 
                 <div class="d-grid gap-2 pt-3">
-                    <button class="btn btn-dark bg-primary" type="submit" style="width:100px;"> Selesai </button>
+                    <button class="btn btn-dark bg-primary" type="submit" name="submit" style="width:100px;"> Selesai </button>
                 </div>
             </div>
         </form>
     </div>
+
+    <!-- PHP Database -->
+    <?
+        if (isset($_POST["submit"])){
+            $mobil = $_POST['car'];
+                echo $mobil;
+            $nama = $_POST['name'];
+                echo $name;
+            $merk = $_POST['merk'];
+                echo $merk;
+            $tanggal = $_POST ['date'];
+                echo $date;
+            $deskripsi = $_POST ['desc'];
+                echo $desc;
+            $foto = $_FILES['foto']['name'];
+                echo $foto;
+            $fotomobil = $_FILES['foto']['tmp_name'];
+            $status = $_POST['status'];
+                echo $status;
+
+            move_uploaded_file($fotomobil, 'Upload/'.$foto);
+
+            $insert = "INSERT INTO modul3 VALUES ('','$mobil','$nama','$merk','$tanggal','$deskripsi','$foto','$status')";
+
+            mysqli_query($connector, $insert);
+        
+
+            if (mysqli_affected_rows($connector) > 0){ ?>
+                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-header">
+                            <img src="..." class="rounded me-2" alt="...">
+                            <strong class="me-auto">Bootstrap</strong>
+                            <small>11 mins ago</small>
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                            Hello, world! This is a toast message.
+                        </div>
+                    </div> <?
+                }
+            else { ?>
+                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <img src="..." class="rounded me-2" alt="...">
+                        <strong class="me-auto">Bootstrap</strong>
+                        <small>11 mins ago</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        Hello, world! This is a toast message.
+                    </div>
+                </div> <?
+            }
+        }
+
+    ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
   </body>
