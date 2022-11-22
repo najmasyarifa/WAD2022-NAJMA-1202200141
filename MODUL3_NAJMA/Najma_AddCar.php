@@ -22,7 +22,7 @@ $connector = mysqli_connect("localhost:3308", "root", "","showroom_najma_table")
                     </li>
 
                     <li class="nav-item mx-2">
-                        <a class="nav-link active" href="Najma_MyCar.html"> My Car </a>
+                        <a class="nav-link active" href="Najma_MyCar.php"> My Car </a>
                     </li>
                 </ul>
             </div>
@@ -31,7 +31,7 @@ $connector = mysqli_connect("localhost:3308", "root", "","showroom_najma_table")
 
     <!-- Form Tambah Mobil -->
     <div class="container-fluid py-2 mx-auto">
-        <form style="margin-left: 100px; margin-right: 300px;" method="POST" action="Najma_AddCar.php" enctype="multipart/form-data">
+        <form style="margin-left: 100px; margin-right: 300px;" method="POST" action="" enctype="multipart/form-data">
             
             <!-- Header -->
             <h3> Tambah Mobil </h3>
@@ -88,14 +88,14 @@ $connector = mysqli_connect("localhost:3308", "root", "","showroom_najma_table")
 
                 <div class="radio pt-2">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status[]" value="Lunas" id="statuslunas" required>
+                        <input class="form-check-input" type="radio" name="status" value="Lunas" id="statuslunas" required>
                         <label class="form-check-label" for="status" style="font-weight: normal;">
                           Lunas
                         </label>
                     </div>
                 
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status[]" value="Belum Lunas" id="statuspaylater" required>
+                        <input class="form-check-input" type="radio" name="status" value="Belum Lunas" id="statuspaylater" required>
                         <label class="form-check-label" for="status" style="font-weight: normal;">
                           Belum Lunas
                         </label>
@@ -103,7 +103,7 @@ $connector = mysqli_connect("localhost:3308", "root", "","showroom_najma_table")
                 </div>
 
                 <div class="d-grid gap-2 pt-3">
-                    <button class="btn btn-dark bg-primary" type="submit" name="submit" style="width:100px;"> Selesai </button>
+                    <button class="btn btn-dark bg-primary" type="submit" name="submit" id="submit" style="width:100px;"> Selesai </button>
                 </div>
             </div>
         </form>
@@ -112,6 +112,7 @@ $connector = mysqli_connect("localhost:3308", "root", "","showroom_najma_table")
     <!-- PHP Database -->
     <?php
         if (isset($_POST['submit'])){
+
             $mobil = $_POST['car'];
             $nama = $_POST['name'];
             $merk = $_POST['merk'];
@@ -121,44 +122,15 @@ $connector = mysqli_connect("localhost:3308", "root", "","showroom_najma_table")
             $fotomobil = $_FILES['foto']['tmp_name'];
             $status = $_POST['status'];
 
+            if (strlen($deskripsi) > 100) 
+                $deskripsi = substr($deskripsi, 0, 100) . '...';
+    
             move_uploaded_file($fotomobil, 'Upload/'.$foto);
+    
+            $insert = "INSERT INTO modul3 VALUES ('','$mobil','$nama','$merk','$tanggal','$deskripsi','$foto','$status')";    
 
-            $select = "SELECT * FROM 'modul3'";
-
-            mysqli_query($connector, $select);
-
-            $insert = "INSERT INTO modul3('id_mobil','nama_mobil','pemilik_mobil','merk_mobil','tanggal_beli','deskripsi','foto_mobil','status_pembayaran') VALUES ('','$mobil','$nama','$merk','$tanggal','$deskripsi','$foto','$status')";
-
-            mysqli_query($connector, $insert);
-
-            if (mysqli_affected_rows($connector) > 0){ ?>
-                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header">
-                        <img src="..." class="rounded me-2" alt="...">
-                        <strong class="me-auto">Bootstrap</strong>
-                        <small>11 mins ago</small>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body">
-                        Hello, world! This is a toast message.
-                    </div>
-                </div> <?
-                }
-            else { ?>
-                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header">
-                        <img src="..." class="rounded me-2" alt="...">
-                        <strong class="me-auto">Bootstrap</strong>
-                        <small>11 mins ago</small>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body">
-                        Hello, world! This is a toast message.
-                    </div>
-                </div> <?
-                
-            }
-        }
+            $simpan = mysqli_query($connector, $insert);}
+        
     ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>

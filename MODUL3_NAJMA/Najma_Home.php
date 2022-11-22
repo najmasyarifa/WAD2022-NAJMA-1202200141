@@ -18,7 +18,7 @@
                     </li>
 
                     <li class="nav-item mx-2">
-                        <a class="nav-link active" href="Najma_MyCar.html"> My Car </a>
+                        <a class="nav-link active" href="Najma_MyCar.php"> My Car </a>
                     </li>
                 </ul>
             </div>
