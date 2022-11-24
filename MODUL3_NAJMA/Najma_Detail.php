@@ -64,59 +64,57 @@
                                             <label for="car"> <b>Nama Mobil</b>  </label>
                                         </div>
                                         <div class="textinput pt-2">
-                                            <input type="text" style="width: 100%; padding: 7px;" name="car" id="carname" value="<?=$get['nama_mobil']?>" required>
+                                            <input type="text" style="width: 100%; padding: 7px;" name="car" id="carname" placeholder="<?=$get['nama_mobil']?>" disabled>
                                         </div>
                         
                                         <div class="labeltext pt-2">
                                             <label for="name"> <b>Nama Pemilik</b>  </label>
                                         </div>
                                         <div class="textinput pt-2">
-                                            <input type="text" style="width: 100%; padding: 7px;" name="name" id="ownername" value="<?=$get['pemilik_mobil']?>" required>
+                                            <input type="text" style="width: 100%; padding: 7px;" name="name" id="ownername" placeholder="<?=$get['pemilik_mobil']?>" disabled>
                                         </div>
                         
                                         <div class="labeltext pt-2">
                                             <label for="merk"> <b>Merk Mobil</b>  </label>
                                         </div>
                                         <div class="textinput pt-2">
-                                            <input type="text" style="width: 100%; padding: 7px;" name="merk" id="merkcar" value="<?=$get['merk_mobil']?>" required>
+                                            <input type="text" style="width: 100%; padding: 7px;" name="merk" id="merkcar" placeholder="<?=$get['merk_mobil']?>" disabled>
                                         </div>
                         
                                         <div class="labeltext pt-2">
                                             <label for="date"> <b> Tanggal Beli </b> </label>
                                         </div>
                                         <div class="textinput pt-2">
-                                            <input type="date" style="width: 100%; padding: 7px;" name="date" value="<?=$get['tanggal_beli']?>" required>
+                                            <input type="date" style="width: 100%; padding: 7px;" name="date"  <?=$get['tanggal_beli']?> disabled> 
                                         </div>
                         
                                         <div class="labeltext pt-2">
                                             <label for="desc"> <b>Deskripsi</b>  </label>
                                         </div>
                                         <div class="textinput pt-2">
-                                            <textarea style="width: 100%; padding: 7px;" name="desc" id="desccar" required><?=$get['deskripsi']?></textarea>
+                                            <textarea style="width: 100%; padding: 7px;" name="desc" id="desccar" disabled><?=$get['deskripsi']?></textarea>
                                         </div>
                         
                                         <div class="labeltext pt-2">
                                             <label for="foto"> <b> Foto Mobil </b> </label>
                                         </div>
                                         <div class="formfile pt-2">
-                                            <input class="form-control" type="file" style="width: 100%; padding: 7px; border-color: black; border-radius: 2px;" name="foto" placeholder="<?=$get['foto_mobil']?>" required>
+                                            <input class="form-control" type="file" style="width: 100%; padding: 7px; border-color: black; border-radius: 2px;" name="foto" disabled>
                                         </div>
-                        
+
                                         <div class="labeltext pt-2">
-                                            <label for="status"> Status Pembayaran </label>
+                                            <label for="foto"> <b> Status Pembayaran </b> </label>
                                         </div>
-                        
                                         <div class="radio pt-2">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="status" value="<?=$get['status_pembayaran']?>" id="statuslunas" required>
+                                                <input class="form-check-input" type="radio" name="status" id="statuslunas"<?php if($get['status_pembayaran'] == "Lunas") {echo "checked";}?>  disabled>
                                                 <label class="form-check-label" for="status" style="font-weight: normal;">
                                                     Lunas
                                                 </label>
-                                                <?php if($get) ?>
                                             </div>
                                         
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="status" value="<?=$get['status_pembayaran']?>" id="statuspaylater" required>
+                                                <input class="form-check-input" type="radio" name="status" id="statuspaylater" <?php if($get['status_pembayaran'] == "Belum Lunas") {echo "checked";}?> disabled>
                                                 <label class="form-check-label" for="status" style="font-weight: normal;">
                                                     Belum Lunas
                                                 </label>
@@ -125,7 +123,7 @@
             
                                         <!-- Button Edit -->
                                         <div class="d-grid gap-2 pt-3">
-                                            <a href="Najma_MyCar.php" class="btn btn-dark bg-primary" type="submit" style="width:100px;"> Edit </a>
+                                            <a href="Najma_Edit.php?id_mobil=<?php echo $get['id_mobil']?>" class="btn btn-dark bg-primary" type="submit" style="width:100px;"> Edit </a>
                                         </div>
                                     </div>
                                 </th>
