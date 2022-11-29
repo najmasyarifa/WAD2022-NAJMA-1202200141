@@ -17,8 +17,8 @@ $connector = mysqli_connect("localhost:3308", "root", "","wad_modul4");
 
     <!-- PHP Database -->
     <?php
-        $id_mobil = $_GET["id_mobil"];
-        $query = "SELECT * FROM modul3 WHERE id_mobil=$id_mobil";
+        $id_mobil = $_GET["id"];
+        $query = "SELECT * FROM modul3 WHERE id_mobil=$id";
 
         $select = mysqli_query($connector,$query);
     ?>
