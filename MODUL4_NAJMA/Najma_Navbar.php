@@ -1,3 +1,4 @@
+<?php session_start()?> 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg bg-primary navbar-dark sticky-top">
     <div class="container-fluid">
@@ -19,10 +20,9 @@
                 </li>
                 <li class="nav-item mx-2">
                     <div class="dropdown">
-                        <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-light dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <?php
-                                $nama_profile = $_SESSION["nama"];
-                                echo $nama_profile
+                                echo $_SESSION["nama"];
                             ?>
                         </button>
                         <ul class="dropdown-menu">

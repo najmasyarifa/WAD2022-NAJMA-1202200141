@@ -99,10 +99,6 @@
         </script>
         ";
         session_destroy();
-        
-    } elseif (isset ($_SESSION["nama"])) {
-        $email = $_SESSION["email"];
-        $pass = $_SESSION["password"];
     }
 
 
@@ -128,6 +124,7 @@
             $_SESSION["email"] = $email;
             $_SESSION["no_hp"] = $check['no_hp'];
             $_SESSION["password"] = $pass;
+            
             header("location:Najma_After.php");
         }
     }

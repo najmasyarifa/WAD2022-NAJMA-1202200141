@@ -1,12 +1,5 @@
 <?php
-
 $connector = mysqli_connect("localhost:3308", "root", "","wad_modul4");
-
-$id=$_GET["id"];
-$select = "SELECT * FROM users WHERE id=$id";
-$query = mysqli_query($connector, $select);
-$get = mysqli_fetch_assoc($query);
-
 ?>   
 
 <!doctype html>
@@ -20,38 +13,8 @@ $get = mysqli_fetch_assoc($query);
   <body>
     
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-primary navbar-dark sticky-top">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse" style="justify-content: left;" id="navbarSupportedContent">
-                <ul class="navbar-nav">
-                    <li class="nav-item mx-2">
-                        <a class="nav-link active" href="Najma_After.php?id=<?=$get['id'];?>"> Home </a>
-                    </li>
-
-                    <li class="nav-item mx-2">
-                        <a class="nav-link active" href="Najma_MyCar.php?id=<?=$get['id'];?>"> My Car </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="collapse navbar-collapse" style="justify-content: right;" id="navbarSupportedContent">
-                <ul class="navbar-nav">
-                    <li class="nav-item mx-2">
-                        <div class="dropdown">
-                            <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <?php echo $get['nama']?>
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="Najma_After.php">Home</a></li>
-                              <li><a class="dropdown-item" href="Najma_Profile.php?id=<?php echo $get['id']?>">Profile</a></li>
-                              <li><a class="dropdown-item" href="#">Logout</a></li>
-                            </ul>
-                          </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+    <?php require("Najma_Navbar.php") ?>
+    
     <!-- Form Tambah Mobil -->
     <div class="container-fluid py-2 mx-auto">
         <form style="margin-left: 100px; margin-right: 300px;" method="POST" action="" enctype="multipart/form-data">

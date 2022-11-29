@@ -1,11 +1,5 @@
-<?php
-session_start();
-$connector = mysqli_connect("localhost:3308", "root", "", "wad_modul4");
-
-$id = $_GET["id"];
-$select = "SELECT * FROM users WHERE id ='$id'";
-$query = mysqli_query($connector, $select);
-$get = mysqli_fetch_assoc($query);
+<?php 
+$connector = mysqli_connect("localhost:3308", "root", "","wad_modul4");
 ?>
 
 <!doctype html>
@@ -19,41 +13,7 @@ $get = mysqli_fetch_assoc($query);
   <body>
     
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-primary navbar-dark sticky-top">
-        <div class="container-fluid">
-            <div class="collapse navbar-collapse" style="justify-content: left;" id="navbarSupportedContent">
-                <ul class="navbar-nav">
-                    <li class="nav-item mx-2">
-                        <a class="nav-link active" href="Najma_After.php?id=<?=$get['id'];?>"> Home </a>
-                    </li>
-
-                    <li class="nav-item mx-2">
-                        <a class="nav-link active" href="Najma_MyCar.php"> My Car </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="collapse navbar-collapse" style="justify-content: right;" id="navbarSupportedContent">
-                <ul class="navbar-nav">
-                    <li class="nav-item mx-2">
-                        <a href="Najma_AddCar.php" type="button" class="btn btn-light">Add Car</a>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <div class="dropdown">
-                            <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <?=$get['nama'] ?>
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="Najma_After.php">Home</a></li>
-                              <li><a class="dropdown-item" href="Najma_Profile.php?id=<?=$get['id'];?>"> <?=$get['nama']?> </a></li>
-                              <li><a class="dropdown-item" href="#">Logout</a></li>
-                            </ul>
-                          </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php require("Najma_Navbar.php") ?>
 
     <!-- Alert Notification -->
     <div class="alert alert-warning alert-dismissible" role="alert" id="alertgagal">
@@ -79,21 +39,21 @@ $get = mysqli_fetch_assoc($query);
                 <div class="d-flex textinput pt-2">
                     <div class="d-flex mx-auto">
                         <label> <b>Email</b>  </label>
-                        <input type="text" style="width: 500px; padding: 7px; margin-left: 208px;" name="email" id="email" value="<?= $get['email'];?>" readonly>
+                        <input type="text" style="width: 500px; padding: 7px; margin-left: 208px;" name="email" id="email" value="<?php echo $_SESSION["email"];?>" readonly>
                     </div>
                 </div>
 
                 <div class="d-flex textinput pt-2">
                     <div class="mx-auto">
                         <label> <b>Nama</b>  </label>
-                        <input type="text" style="width: 500px; padding: 7px; margin-left: 200px;" name="nama" id="nama" value="<?=$get['nama'];?>" required>
+                        <input type="text" style="width: 500px; padding: 7px; margin-left: 200px;" name="nama" id="nama" value="<?php echo $_SESSION["nama"];?>" required>
                     </div>
                 </div>
 
                 <div class="d-flex textinput pt-2">
                     <div class="mx-auto">
                         <label> <b>Nomor Handphone</b>  </label>
-                        <input type="text" style="width: 500px; padding: 7px;margin-left: 100px" name="nohp" id="nohp" value="<?=$get['no_hp'];?>" required>
+                        <input type="text" style="width: 500px; padding: 7px;margin-left: 100px" name="nohp" id="nohp" value="<?php echo $_SESSION["no_hp"];?>" required>
                     </div>
                 </div>
 
@@ -106,14 +66,14 @@ $get = mysqli_fetch_assoc($query);
                 <div class="d-flex textinput pt-2">
                     <div class="mx-auto">
                         <label> <b>Kata Sandi</b>  </label>
-                        <input type="text" style="width: 500px; padding: 7px; margin-left: 167px;" name="password" id="password" placeholder="Kata Sandi" required>
+                        <input type="password" style="width: 500px; padding: 7px; margin-left: 167px;" name="password" id="password" placeholder="Kata Sandi" required>
                     </div>
                 </div>
 
                 <div class="d-flex textinput pt-2">
                     <div class="mx-auto">
                         <label> <b>Konfirmasi Kata Sandi</b>  </label>
-                        <input type="text" style="width: 500px; padding: 7px; margin-left: 80px;" name="repassword" id="repassword" placeholder="Konfirmasi Kata Sandi" required>
+                        <input type="password" style="width: 500px; padding: 7px; margin-left: 80px;" name="repassword" id="repassword" placeholder="Konfirmasi Kata Sandi" required>
                     </div>
                 </div>
 
@@ -159,21 +119,18 @@ $get = mysqli_fetch_assoc($query);
 
     if (isset($_POST["update"])){
         if(isset($_POST["password"]) == ($_POST["repassword"])){
+            $email = $_SESSION["email"];
             $nama = $_POST["nama"];
             $nohp = $_POST["nohp"];
             $pass = $_POST["password"];
 
-            $update = "UPDATE users SET nama = '$nama', password = '$pass', no_hp = '$nohp' WHERE id = $id";
+            $update = "UPDATE users SET nama = '$nama', password = '$pass', no_hp = '$nohp' WHERE email = '$email'";
             $simpan = mysqli_query($connector, $update);
 
             if ($simpan) {
+                $_SESSION["nama"] = $nama;
                 $_SESSION["alert"] = true;
-                echo"
-                    <script>
-                        berhasil.style.display = 'block'
-                        document.location.href = './Najma_Profile.php?id=$id';
-                    </script>
-                ";
+                header('location: Najma_Profile.php');
             } else {
                 echo"
                 <script>

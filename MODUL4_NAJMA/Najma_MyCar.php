@@ -1,12 +1,5 @@
 <?php
 $connector = mysqli_connect("localhost:3308", "root", "","showroom_najma_table");
-
-$modul4 = mysqli_connect("localhost:3308", "root", "","wad_modul4");
-
-$id=$_GET["id"];
-$selmodul4 = "SELECT * FROM users WHERE id=$id";
-$quemodul4 = mysqli_query($modul4, $selmodul4);
-$getmodul4 = mysqli_fetch_assoc($quemodul4);
 ?>
 
 <!doctype html>
