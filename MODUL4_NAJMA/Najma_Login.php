@@ -106,14 +106,14 @@
         $email = $_POST['email'];
         $pass = $_POST['password'];
     
-        $select = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+        $select = "SELECT * FROM users WHERE email='$email' AND password='$pass'";
         $query = mysqli_query($connector, $select);
 
         if (mysqli_num_rows($query) == 0) {
             $_SESSION["gagal"] = true;
             echo"
             <script>
-                document.location.href = 'Login.php';
+                document.location.href = 'Najma_Login.php';
             </script>
         ";
 

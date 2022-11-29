@@ -13,7 +13,7 @@ $connector = mysqli_connect("localhost:3308", "root", "","wad_modul4");
   <body>
     
     <!-- Navbar -->
-    <?php require("Najma_Edit.php") ?>
+    <?php require("Najma_Navbar.php") ?>
     
     <!-- Form Tambah Mobil -->
     <div class="container-fluid py-2 mx-auto">
