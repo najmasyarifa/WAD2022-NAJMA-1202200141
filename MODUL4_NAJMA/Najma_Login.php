@@ -17,7 +17,13 @@
     <div class="alert alert-danger alert-dismissible" role="alert" id="alertgagal">
         Login gagal! Email atau kata sandi tidak terdaftar. Silahkan cek kembali.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>   
+    </div> 
+    
+
+    <div class="alert alert-success alert-dismissible" role="alert" id="alertlogout">
+        Log Out Berhasil!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 
     <!-- Tampilan Login -->
     <div class="container-fluid">
@@ -84,6 +90,9 @@
     <script>
         var gagal = document.getElementById('alertgagal');
         gagal.style.display = 'none'
+
+        var logout = document.getElementById('alertlogout');
+        logout.style.display = 'none'
     </script>
 
   </body>
@@ -101,6 +110,14 @@
         session_destroy();
     }
 
+    if (isset($_SESSION["Logout"])){
+        echo "
+        <script>
+            logout.style.display = 'block'
+        </script>";
+        session_destroy();
+    }
+
 
     if (isset($_POST['login'])){
         $email = $_POST['email'];
@@ -114,8 +131,7 @@
             echo"
             <script>
                 document.location.href = 'Najma_Login.php';
-            </script>
-        ";
+            </script>";
 
         } elseif (mysqli_num_rows($query) == 1) {
             $check = mysqli_fetch_assoc($query);
@@ -125,7 +141,10 @@
             $_SESSION["no_hp"] = $check['no_hp'];
             $_SESSION["password"] = $pass;
             
-            header("location:Najma_After.php");
+            echo"
+            <script>
+                document.location.href = 'Najma_After.php';
+            </script>";
         }
     }
 ?>

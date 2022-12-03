@@ -69,7 +69,7 @@ $connector = mysqli_connect("localhost:3308", "root", "","showroom_najma_table")
                         ?>
 
                         <button type="button" class="btn btn-secondary"  style="margin-right: 2.5px;" data-bs-dismiss="modal">Cancel</button>
-                        <a type="button" href="Delete.php?id_mobil=<?php echo $get['id_mobil']?>" class="btn btn-danger form-control" style="margin-left: 2.5px;">Delete</a>
+                        <a type="button" href="Najma_Delete.php?id_mobil=<?php echo $get['id_mobil']?>" class="btn btn-danger form-control" style="margin-left: 2.5px;">Delete</a>
                     </div>
                 </div>
             </div>
