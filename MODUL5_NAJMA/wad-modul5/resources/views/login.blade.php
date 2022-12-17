@@ -13,21 +13,24 @@
   </head>
   <body>
 
-    <!-- Alert Notification -->
-    <div class="alert alert-danger alert-dismissible" role="alert" id="alertgagal">
-        Login gagal! Email atau kata sandi tidak terdaftar. Silahkan cek kembali.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div> 
-    
-
-    <div class="alert alert-success alert-dismissible" role="alert" id="alertlogout">
-        Log Out Berhasil!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-
     <!-- Tampilan Login -->
     <div class="container-fluid">
         <div class="row">
+
+            <!-- Alert Notification -->
+            @if(session()->has('success'))
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            @if(session()->has('failed'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    {{ session('failed') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
 
             <!-- Kolom Kanan -->
             <div class="col">
@@ -39,27 +42,37 @@
             <!-- Kolom kiri -->
             <div class="col" style="width: 600px;">
                 <div  class="my-auto">
-                    <form class="mx-auto" style="width: 90%;" method="POST" action="{{ route('UserLogin') }}">
-                    
+                    <form class="mx-auto" style="width: 90%;" method="POST" action="/login">
+
                         @csrf
                         <!-- Header -->
-                        <h3 style="padding-top: 120px;"> Register </h3>
+                        <h3 style="padding-top: 120px;"> Login </h3>
                         <p style="color: grey;"></p>
             
                         <!-- Form Input -->
                         <div class="row">
                             <div class="labeltext pt-1">
-                                <label for="mail"> <b>Email</b>  </label>
+                                <label for="email"> <b>Email</b>  </label>
                             </div>
                             <div class="textinput pt-1">
-                                <input type="text" style="width: 100%; padding: 7px; border-radius: 10px; border-width: 1px;" name="email" id="email" required>
+                                <input class="@error('email') is-invalid @enderror" type="email" style="width: 100%; padding: 7px; border-radius: 10px; border-width: 1px;" name="email" id="email" autofocus required>
+                                @error('email')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
             
                             <div class="labeltext pt-1">
                                 <label for="password"> <b> Kata Sandi </b> </label>
                             </div>
                             <div class="textinput pt-1">
-                                <input type="password" style="width: 100%; padding: 7px; border-radius: 10px; border-width: 1px;" name="password" id="password" required>
+                                <input class= "@error('repassword') is-invalid @enderror" type="password" style="width: 100%; padding: 7px; border-radius: 10px; border-width: 1px;" name="password" id="password" required>
+                                @error('repassword')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
 
                             <div class="textinput pt-2">
@@ -88,64 +101,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
-    <script>
-        var gagal = document.getElementById('alertgagal');
-        gagal.style.display = 'none'
-
-        var logout = document.getElementById('alertlogout');
-        logout.style.display = 'none'
-    </script>
-
   </body>
 </html>
-
-<!-- PHP Database -->
-<?php
-
-    if (isset($_SESSION["gagal"])){
-        echo "
-        <script>
-            gagal.style.display = 'block'
-        </script>
-        ";
-        session_destroy();
-    }
-
-    if (isset($_SESSION["Logout"])){
-        echo "
-        <script>
-            logout.style.display = 'block'
-        </script>";
-        session_destroy();
-    }
-
-
-    if (isset($_POST['login'])){
-        $email = $_POST['email'];
-        $pass = $_POST['password'];
-    
-        $select = "SELECT * FROM users WHERE email='$email' AND password='$pass'";
-        $query = mysqli_query($connector, $select);
-
-        if (mysqli_num_rows($query) == 0) {
-            $_SESSION["gagal"] = true;
-            echo"
-            <script>
-                document.location.href = 'Najma_Login.php';
-            </script>";
-
-        } elseif (mysqli_num_rows($query) == 1) {
-            $check = mysqli_fetch_assoc($query);
-
-            $_SESSION["nama"] = $check['nama'];
-            $_SESSION["email"] = $email;
-            $_SESSION["no_hp"] = $check['no_hp'];
-            $_SESSION["password"] = $pass;
-            
-            echo"
-            <script>
-                document.location.href = 'Najma_After.php';
-            </script>";
-        }
-    }
-?>

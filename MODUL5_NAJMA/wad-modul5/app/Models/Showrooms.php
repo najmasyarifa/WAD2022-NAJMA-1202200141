@@ -12,15 +12,14 @@ class Showrooms extends Model
 
     protected $table = 'showrooms';
 
-    protected $fillable = [
-        'id',
-        'user_id',
-        'nama',
-        'owner',
-        'brand',
-        'puchase_date',
-        'drescription',
-        'image',
-        'status',
-    ];
+    // protected $fillable = [
+    //     'nama',
+    //     'owner',
+    //     'brand',
+    //     'puchase_date',
+    //     'drescription',
+    //     'image',
+    //     'status',
+    // ];
+    protected $guarded = ['id'];
 }

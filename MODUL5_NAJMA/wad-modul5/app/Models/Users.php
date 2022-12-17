@@ -13,13 +13,5 @@ class Users extends Model
 
     use HasFactory;
 
-    protected $fillable = [
-        'id',
-        'nama',
-        'no_hp',
-        'email',
-        'password',
-    ];
-
-    protected $hidden = ['password'];
+    protected $guarded = ['id'];
 }

@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('showrooms', function (Blueprint $table) {
-            $table->bigInteger('id');
-            $table->bigInteger('user_id');
+            $table->bigInteger('id')->autoIncrement();
             $table->string('nama');
             $table->string('owner');
             $table->string('brand');
@@ -32,8 +31,4 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::dropIfExists('showrooms');
-    }
 };

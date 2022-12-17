@@ -3,6 +3,7 @@ use App\Models\Users;
 use App\Models\Showrooms;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FirstPageController;
+use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ShowroomsController;
 use Illuminate\Routing\Route as RoutingRoute;
@@ -26,6 +27,17 @@ Route::get('/', function () {
     return view('firstpage');
 });
 
-Route::get('/login', [FirstPageController::class, 'LoginPage'])->name('LoginPage');
-Route::get('/register', [FirstPageController::class, 'RegisterPage'])->name('RegisterPage');
-Route::post('/login', [FirstPageController::class, 'UserLogin'])->name('UserLogin');
+Route::get('/register', [FirstPageController::class, 'RegisterPage']);
+Route::get('/login', [FirstPageController::class, 'LoginPage']);
+
+Route::post('/register', [FirstPageController::class, 'Register']);
+Route::post('/login', [FirstPageController::class, 'Login']);
+
+Route::get('/homepage', [HomePageController::class, 'HomePage']);
+Route::get('/addcar', [HomePageController::class, 'AddCarPage']);
+Route::get('/mycarpage', [HomePageController::class, 'MyCar']);
+Route::get('/profilepage', [HomePageController::class, 'ProfilePage']);
+
+Route::post('/addcar', [HomePageController::class, 'AddCar']);
+
+Route::get('/mycar', [CarController::class, 'MyCar']);
