@@ -1,12 +1,8 @@
 <?php
-use App\Models\Users;
-use App\Models\Showrooms;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FirstPageController;
 use App\Http\Controllers\HomePageController;
-use App\Http\Controllers\UsersController;
-use App\Http\Controllers\ShowroomsController;
-use Illuminate\Routing\Route as RoutingRoute;
 
 /*
 |--------------------------------------------------------------------------
